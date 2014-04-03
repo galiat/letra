@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Codystar|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='./beat.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div id='container'>
+        <!-- #info-container is the top panel, with album art and info -->
+        <div id='info-container' class='container'>
+            <div id='cover-container'>
+                <div id='cover'></div>
+            </div>
+            <div id='track-data-container'>
+                <div id='track-artist'></div>
+                <div id='track-name'></div>
+            </div>
+        </div>
+
+
+        <!-- #tracklist-container is the bottom panel, w/ headings & tracks -->
+        <div id='tracklist-container' class='container'>
+            <div id='tracklist'>
+
+                <div class='header row'>
+                    <div class='cell album'>
+                        album
+
+                        <!-- Album ascending/Descending sort arrows -->
+                        <div class='sort-container'>
+                            <!-- We're wrapping in a link that goes nowhere to
+                                 to make our divs clickable. -->
+                            <a href='#' class='sort up'>
+                                <div id='sort-album-up' class='arrow up'></div>
+                            </a>
+                            <a href='#' class='sort down'>
+                                <div id='sort-album-down' class='arrow down'></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class='cell artist'>
+                        artist
+
+                        <!-- Artist ascending/Descending sort arrows -->
+                        <div class='sort-container'>
+                            <a href='#' class='sort up'>
+                                <div id='sort-artist-up' class='arrow up'></div>
+                            </a>
+                            <a href='#' class='sort down'>
+                                <div id='sort-artist-down' class='arrow down'></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class='cell title'>
+                        title
+
+                        <!-- Title ascending/Descending sort arrows -->
+                        <div class='sort-container'>
+                            <a href='#' class='sort up'>
+                                <div id='sort-title-up' class='arrow up'></div>
+                            </a>
+                            <a href='#' class='sort down'>
+                                <div id='sort-title-down' class='arrow down'></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class='cell tempo'>
+                        tempo
+
+                        <!-- Tempo ascending/Descending sort arrows -->
+                        <div class='sort-container'>
+                            <a href='#' class='sort up'>
+                                <div id='sort-tempo-up' class='arrow up'></div>
+                            </a>
+                            <a href='#' class='sort down'>
+                                <div id='sort-tempo-down' class='arrow down'></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- .overlay used as a placeholder for pseudo:before to apply box-shadow
+                and keep the shadow as the .body div scrolls behind -->
+                <div class='overlay'></div>
+
+                <!-- .body contains actual tracks, i.e. it excludes header -->
+                <div class='body'></div>
+            </div>
+        </div>
+    </div>
+
+    <script src='./processing.js'></script>
+    <script src='./spotify.js'></script>
+    <script src='./echonest.js'></script>
+    <script src='./beat.js'></script>
+</body>
+
+</html>

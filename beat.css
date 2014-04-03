@@ -1,0 +1,336 @@
+/******************************************************************************
+* Overall Structure */
+html, body {
+	padding: 0;
+	margin: 0;
+
+	height: 100%;
+}
+
+html { background-color: #EEE; }
+
+body {
+	position: absolute;
+	
+	top: 0;
+	bottom: 0;
+	width: 640px;
+	left: calc( (100% - 640px) / 2 );
+
+	overflow: hidden;
+}
+
+#container {
+	position: absolute;
+
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+
+/**************************************
+* #info-container styling (the top panel with album cover, track info) */
+
+#container, #cover, #info-container > div {
+	-webkit-transition-duration: 2s;
+}
+
+#info-container {
+	position: absolute;
+	top: -240px;
+
+	width: 640px;
+	height: 240px;
+
+	background-color: #ccc
+}
+
+#info-container > div {
+	text-align: center;
+
+	color: #555;
+	opacity: 0;
+}
+
+
+/********************
+/* #cover-container (album cover) */
+#cover-container {
+	position: relative;
+	
+	width: 240px;
+	height: 100%;
+
+	float: left;
+}
+
+#cover {
+	float: left;
+
+	margin: 15px;
+
+	/* 15px is to accomodate the margin */
+	width: calc(240px - 2*15px);
+	height: calc(240px - 2*15px);
+
+	/* this curves the border of the div */
+    border-radius: 4%;
+
+    /* background-size: contain insures the image is fit within the div,
+    no-repeat prevents it from repeating to fill the div background */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/********************
+/* track-data (artist, track-name) */
+#track-data-container {
+	float: left;
+
+	width: calc(100% - 240px);
+	height: 100%;
+
+	font-family: 'Codystar', serif;
+	font-size: 2em;
+	text-transform: uppercase;
+}
+
+#track-data-container > div {
+	position: absolute;
+
+	width: calc(640px - 240px);
+	height: 25%;
+	line-height: 2em;
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#track-artist { top: 2em; }
+#track-name { bottom: 2em; }
+
+
+/*****************************************************************************
+* Tracklist interface */
+
+#tracklist-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+
+	width: 640px;
+}
+
+#tracklist {
+	height: 100%;
+	width: 100%;
+
+	font-family: 'Open Sans', sans-serif;
+}
+
+#tracklist .body { background-color: #ccc }
+
+
+/**************************************
+* Styling of overlay, scrolling functionality of tracklist */
+
+#tracklist .body {
+	position: absolute;
+	
+	top: 80;
+	bottom: -1px; /* To hide a 1px dashed bottom track border */
+
+	width: 100%;
+
+	overflow: scroll;
+}
+
+#tracklist .overlay:before, #info-container {
+	box-shadow: inset 1px 1px 9px 1px #000;
+}
+
+#tracklist .overlay:before {
+	content: '';
+
+	position: absolute;
+
+	width:100%;
+	height: 100%;
+
+	top: 80px;
+
+	z-index: 100; /* Ensures the overlay is on top of everything else */
+
+	pointer-events: none; /* Precents interception of click & hover events */
+}
+
+
+/**************************************
+* general .cell and .row styling (avoiding tables because of a variety of
+  defaults we'd have to undo and fight with later) */
+
+.cell {
+    float: left;
+
+	height: 80px;
+    line-height: 80px;
+
+	text-align: center;
+
+	white-space: nowrap; /* We don't want any multiline cells */
+	overflow: hidden;
+    text-overflow: ellipsis; /* This replaces too-long text with '...' */
+}
+
+.row {
+	position: absolute;
+	
+	height: 80px;
+	width: 100%;
+}
+
+
+/**************************************
+* Header */
+
+.header.row {
+	/* Making the header row overlap the edges of the overlay to provide the
+	illusion of a solid strip, sliding it left to keep the header centered. */
+	padding-left: 5%;
+	padding-right: 5%;
+	margin-left: calc(-1 * (5% + 5%) / 2);
+
+}
+
+.header .cell {
+	font-family: 'Codystar', cursive;
+	font-size: 1.25em;
+
+	text-transform: uppercase;
+
+	/* Accommodating the up/down arrows in the sort-container (25px tall) */
+	line-height: calc(80px - 25px);
+}
+
+
+/**************************************
+* Column styling */
+
+/* Here we're fixing the album width and dividing the rest of the space into 
+sixths, deciding that .tempo should be one half .artist and one-third title */
+.album  { width: calc( 5em + 1em); }
+.artist { width: calc( (100% - (5em + 1em)) * 2/6); }
+.title  { width: calc( (100% - (5em + 1em)) * 3/6); }
+.tempo  { width: calc( (100% - (5em + 1em)) * 1/6); }
+
+
+/**************************************
+* Track row styling */
+
+.track.row {
+	margin-left: 9px;
+	margin-right: 9px;
+
+	width: calc(640px - 2*9px);
+}
+
+.track {
+	display: block;
+
+	margin-left: auto;
+	margin-right: auto;
+
+	margin-top: calc( 1em + 1px );
+	padding-bottom: calc( (1em + 1px) / 2 - 1px );
+	
+	border-bottom: 1px dashed rgba(85, 85, 85, 1);
+
+	opacity: 0.5;
+	-webkit-transition-duration: 0.75s;
+}
+
+.current-track {
+	background-color: FireBrick;
+
+	/* (3) Because we'll be setting the opacity of the current track to 1, 
+	we need to change the opacity of the border color to prevent its
+	border from appearing darker than other dividers. */
+
+	border-bottom-color: rgba(85, 85, 85, .5);
+	opacity: 1;
+}
+
+
+/**************************************
+* Up-down arrows for heading sorting */
+
+.sort-container {
+	position: relative;
+	top: -10px;
+	left: -3px;
+
+	width: 5px;
+	height: 1em;
+
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a.sort {
+	display: block;
+
+	width: 10px;
+	height: 5px;
+}
+
+.arrow {
+	position: absolute;
+
+	width: 0; 
+	height: 0; 
+
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+}
+
+.arrow.up {
+	top: 0;
+
+	border-bottom: 5px solid black;
+}
+
+.arrow.down {
+	bottom: 0;
+
+	border-top: 5px solid FireBrick;
+}
+
+
+
+/**************************************
+* Styling of Spotify embed */
+
+.embed-container {
+	margin-left: 1em;
+	position: relative;
+}
+
+.embed-container, .inter {
+	width: 80px;
+	height: 80px;
+}
+
+.inter {
+	position: absolute;
+
+	top: 0;
+	left: 0;
+}
+
+.track iframe {
+	width: 80px;
+	height: 80px;
+}
