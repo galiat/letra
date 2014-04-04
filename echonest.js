@@ -1,9 +1,9 @@
 //////////////////////////////////////
 // EchoNest functionality
 
-// (1) Spotify's API is open to anyone, for EchoNest's you need to sign up for 
-// your own API key -- this is a credential that lets EchoNest keep track of 
-// who is using their API how.  You can read more about EchoNest's API, 
+// (1) Spotify's API is open to anyone, for EchoNest's you need to sign up for
+// your own API key -- this is a credential that lets EchoNest keep track of
+// who is using their API how.  You can read more about EchoNest's API,
 // including how to get a key, at http://developer.echonest.com/docs/v4
 
 var ENAPI = 'https://developer.echonest.com/api/v4/';
@@ -11,7 +11,7 @@ var ENAPIKey = '0TPFPI9TGBX5CJU49';
 
 
 function ENSearch(track) {
-    // (1) This function takes a track (which you may remember we got from 
+    // (1) This function takes a track (which you may remember we got from
     // Spotify's API) and searches EchoNest for it, returning the first
     // result if there is one
 
@@ -32,13 +32,13 @@ function ENSearch(track) {
 
 
 function ENSongSearch(parameters) {
-    // (1) This function searches _just_ EchoNest's song API and returns the 
+    // (1) This function searches _just_ EchoNest's song API and returns the
     // parsed JSON object
     //
     // An example query URL:
     // http://developer.echonest.com/api/v4/song/search?api_key=0TPFPI9TGBX5CJU49&format=json&results=1&artist=radiohead&title=karma%20police
 
-    // Constructing the URL we'll use 
+    // Constructing the URL we'll use
     parameters['format'] = 'json';
     var songSearchAPI = ENAPI + 'song/search';
     var url = [
@@ -110,7 +110,7 @@ function loudnessAt(track, time) {
     // (1) This function finds the EchoNest measurement of how long a given
     // track is at a given time.
 
-    // (3) "segments" are EchoNests objects for small bits of a song which are 
+    // (3) "segments" are EchoNests objects for small bits of a song which are
     // acoustically pretty constant.  Read more about them at:
     // http://developer.echonest.com/docs/v4/_static/AnalyzeDocumentation.pdf
     var segments = track.echo.audio_analysis.segments;
@@ -118,7 +118,7 @@ function loudnessAt(track, time) {
     var timeCovered = 0;
 
     // (2) Search through and find the segment containing the time we seek;
-    // each segment is _not_ the same duration 
+    // each segment is _not_ the same duration
     for (var i = 0; i < segments.length; i++) {
         timeCovered += segments[i].duration;
         if (timeCovered > time) {
@@ -131,7 +131,7 @@ function loudnessAt(track, time) {
 
 
 function loudnessSketch(track) {
-    // (2) This function _returns a function_ which Processing runs to make 
+    // (2) This function _returns a function_ which Processing runs to make
     // our sketch.
 
     function sketchProc(P) {
@@ -207,4 +207,18 @@ function rowBackground(row) {
     row.style.backgroundImage = "url(" + binaryImageData + ")";
 
     return binaryImageData;
+}
+
+// via http://stackoverflow.com/questions/6312993/javascript-seconds-to-time-with-format-hhmmss
+function toHHMMSS(sec_num) {
+    //var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    var time    = hours+':'+minutes+':'+seconds;
+    return time;
 }

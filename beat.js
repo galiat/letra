@@ -84,7 +84,8 @@ function rowAttrsFromTrack(track) {
         // shortcut for writing out a full if/else statement.  You can read
         // more about it at:
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-        'data-tempo': track.echo ? track.echo.audio_summary.tempo : -1
+        'data-tempo': track.echo ? track.echo.audio_summary.tempo : -1,
+        'data-duration': track.echo ? track.echo.audio_summary.duration : -1
     };
 
     return attrs;
@@ -139,7 +140,12 @@ function cellsFromTrackAndAttrs(track, attrs) {
         ['tempo', attrs['data-tempo'] > 0 ? // if we have a number
             Math.round(attrs['data-tempo']) : // round it
             '-'
+        ],
+        ['duration', attrs['data-duration'] > 0 ? // if we have a number
+            toHHMMSS(Math.round(attrs['data-duration'])) : // round it
+            '-'
         ] // otherwise, display it as '-'
+
     ];
 
     // (1) Iterate over those cells & wrap that content in an appropriate Node

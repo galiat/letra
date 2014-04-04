@@ -14,7 +14,7 @@ function SPSearch(type, query) {
         type + '.json', // we want our results in JSON
         '?q=' + encodeURIComponent(query)
     ].join('');
-    // Oftentimes, when you're constructing a URL, you need to make sure that 
+    // Oftentimes, when you're constructing a URL, you need to make sure that
     // things you are putting in the URL (like spaces or slashes) are formatted
     // appropriately; this is what encodeURIComponent does.
 
@@ -43,8 +43,8 @@ function SPIframe(track) {
     embedContainer.setAttribute('data-contained-track', iframe.id);
 
 
-    // (3) A lot of complexities are introduced when dealing with iframes or 
-    // cross posted/hosted scripts or content.  Many of the things you 
+    // (3) A lot of complexities are introduced when dealing with iframes or
+    // cross posted/hosted scripts or content.  Many of the things you
     // expect to be able to do--like listen for a click event--you can't
     // because it poses a security risk.  You can read more about this:
     // https://en.wikipedia.org/wiki/Cross-site_scripting
@@ -63,7 +63,7 @@ function SPIframe(track) {
 
 
 function SPIframeAttrs(track) {
-    // (2) This function creates a dictionary of the attributes we want our 
+    // (2) This function creates a dictionary of the attributes we want our
     // embedded spotify player to have
 
     // Sizes Spotify supports
@@ -80,7 +80,7 @@ function SPIframeAttrs(track) {
         'frameborder': 0,
         'allowtransparency': 'true',
         'class': 'track-container',
-        // (3) Our trackDiv's _also_ have this id, however, the iframe is 
+        // (3) Our trackDiv's _also_ have this id, however, the iframe is
         // a separate document, so they do not conflict--
         'id': track.href
     };
@@ -96,7 +96,7 @@ function SPMetadata(track) {
     // You can read more about it at:
     // https://developer.spotify.com/technologies/web-api/
     //
-    // (1) We need to use https://en.wikipedia.org/wiki/JSONP to 
+    // (1) We need to use https://en.wikipedia.org/wiki/JSONP to
     // grab the data-- Basically, we tell the server the name of a function
     // (loadSPMetadata) for us which they'll return a .js file running it,
     // passing the data we asked for as an argument.
@@ -120,19 +120,19 @@ function SPMetadata(track) {
 
 
 function loadSPMetadata(rawMetadata) {
-    // (1) This is the function we're asking Spotify to run on its data; it 
+    // (1) This is the function we're asking Spotify to run on its data; it
     // takes Spotify's raw response as an argument
 
     var metadata = parseSPMetadata(rawMetadata);
     trackByHref(metadata[0]).spotify = metadata[1]; // Load the metadata into
-    // the track.spotify attr 
+    // the track.spotify attr
 
     return metadata[1];
 }
 
 
 function parseSPMetadata(metadata) {
-    // (1) This is a function to, given some metadata, figure out which 
+    // (1) This is a function to, given some metadata, figure out which
     // song the metadata belongs to.
 
     var href = trackHash(metadata.html);
@@ -184,7 +184,7 @@ function trackByHref(href) {
 
 
 function coverURL(track) {
-    // (1) This function grabs the cover thumbnail URL that the Spotify API 
+    // (1) This function grabs the cover thumbnail URL that the Spotify API
     // provides us with and modifies it to grab the hi-res, unbranded version
 
     return track.spotify.thumbnail_url.replace('/cover/', '/640/');
