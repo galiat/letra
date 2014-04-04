@@ -1,0 +1,1 @@
+var not_words = "a is the him he she her it than i to on of you in it"
