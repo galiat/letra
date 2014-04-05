@@ -1,4 +1,4 @@
-var not_words = "a is the him he she her it than i to on of you in it and but be as if an well for with no was his me".split(" ");
+var not_words = "with went than then this from it's you'd i'll i've that your been".split(" ");
 var words = "The Devil went down to Georgia. He was lookin' for a soul to steal. \
 He was in a bind 'cause he was way behind. He was willing to make a deal\
 When he came across this young man sawin' on a fiddle and playin' it hot.\
@@ -39,4 +39,22 @@ And he played:\
 Fire on the Mountain. Run, boys, run!\
 The Devil's in the house of the rising sun;\
 Chicken's in the bread pan picking out dough.\
-Granny, does your dog bite? No, child, no.".toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ").filter(function(word){return not_words.indexOf(word) < 0;})
+Granny, does your dog bite? No, child, no.".toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").split(" ").filter(function(word){return word.length > 3 && not_words.indexOf(word) < 0;})
+var frequencys = [];
+var len = words.length;
+for(var i=0; i<len; i++){
+  var word = words[i];
+  if (frequencys[word] == null){
+    frequencys[word] =   1;
+  }else{
+    frequencys[word] = frequencys[word] + 1;
+  }
+}
+keys = Object.keys(frequencys);
+frequency_list = [];
+len = keys.length;
+for(var i=0; i<len; i++){
+  if(frequencys[keys[i]] > 1){
+    frequency_list.push({'text': keys[i], 'size': frequencys[keys[i]]});
+  }
+}
