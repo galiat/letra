@@ -24,10 +24,10 @@
 
 
     var color = d3.scale.linear()
-            .domain([0,1,2,3,4,5,6,8,11,15,20])
+            .domain([0,1,2,3,4,5,6,8,11,15,20]) //this formuala would prob change depending on the song
             .range(["#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"]);
 
-    d3.layout.cloud().size([200, 200])
+    d3.layout.cloud().size([220, 220])
             .words(frequency_list)
             .rotate(0)
             .fontSize(function(d) { return d.size; })
@@ -36,23 +36,66 @@
 
     function draw(words) {
         d3.select("body").append("svg")
-                .attr("width", 250)
-                .attr("height", 250)
+                .attr("width", 220)
+                .attr("height", 220)
                 .attr("class", "wordcloud")
                 .append("g")
                 // without the transform, words words would get cutoff to the left and top, they would
                 // appear outside of the SVG area
-                .attr("transform", "translate(50,50)")
+                //.attr("transform", "translate(110,110)")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
-                .style("font-size", function(d) { return d.size + "px"; })
+                //this formuala would prob change depending on the song
+                .style("font-size", function(d) { return Math.pow(d.size+1, 2.5) + "%"; })
                 .style("fill", function(d, i) { return color(i); })
                 .attr("transform", function(d) {
-                    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                    return "translate(" + [d.x, d.y*1.5] + ")";//rotate(" + d.rotate + ")";
                 })
                 .text(function(d) { return d.text; });
     }
+
+    var lowx= 0;
+    var lowy= 0;
+    var highx= 0;
+    var highy= 0;
+
+    var texts = document.getElementsByTagName('text');
+    var len = texts.length;
+    for(var i = 0; i < len; i++){
+      var x = texts[i].transform.animVal.getItem(0).matrix['e'];
+      var y = texts[i].transform.animVal.getItem(0).matrix['f'];
+      if(y-texts[i].offsetHeight < lowy){
+        lowy = y-texts[i].offsetHeight
+      }
+      if(x < lowx){
+        lowx = x
+      }
+     if(y > highy){
+        highy = y;
+      }
+      if(x > highx + texts[i].offsetWidth){
+        highx = x  + texts[i].offsetWidth;
+      }
+
+    }
+
+    var movex = - lowx
+
+    var movey = - lowy
+    //var movex= movex + 50;
+    //var movey= movey + 50;
+    //offsetWidth
+    for(var i = 0; i < len; i++){
+      var x = texts[i].transform.animVal.getItem(0).matrix['e'];
+      var y = texts[i].transform.animVal.getItem(0).matrix['f'];
+      // console.log(texts[i].innerHTML);
+      // console.log(x);
+      // console.log(y);
+      //texts[i].setAttribute('transform',"translate(" + (x - movex)+ "," + (y - movey) + ")");
+      texts[i].setAttribute('transform',"translate(" + (x+movex)+ "," + (y+movey) + ")");
+    }
+
 </script>
 </body>
 </html>
