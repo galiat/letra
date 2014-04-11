@@ -1,4 +1,4 @@
-var letra = "Vuela un columpio sobre mi cabeza,\
+var letra = lyricsToArray("Vuela un columpio sobre mi cabeza,\
 vuela por el cementerio de mi voluntad.\
 Sigo buscando la niña que llora en tus fiestas,\
 suenan campanas en flor por mi funeral.\
@@ -32,7 +32,11 @@ y la luna me pinta los ojos.\
 Mírame cada vez que te vas pienso en tí,\
 cada vez que prefiero morir,\
 cada vez que me besas así,\
-cada vez que te vas mírame".toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").split(" ").filter( onlyUnique );
+cada vez que te vas mírame");
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
+}
+
+function lyricsToArray(lyrics){
+  return lyrics.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").split(" ").filter( onlyUnique );
 }

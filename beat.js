@@ -190,9 +190,11 @@ function setCurrentTrack(track) {
     // (1) Set the cover album art to the URL grabbed from Spotify metadata
     document.getElementById('cover').style.backgroundImage = 'url(' + coverURL(track) + ')';
 
-    // (1) Modify the displayed artist and track name
-    document.getElementById('track-artist').innerHTML = artists(track);
-    document.getElementById('track-name').innerHTML = track.name;
+    // // (1) Modify the displayed artist and track name
+    // document.getElementById('track-artist').innerHTML = artists(track);
+    // document.getElementById('track-name').innerHTML = track.name;
+    var letra = getLyrics(artists(track), track.name, document.getElementById('vocab'));
+
 
     // (1) Fade in all the children of #info-container-- i.e. our track
     // info and album cover
