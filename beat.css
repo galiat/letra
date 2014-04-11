@@ -14,21 +14,26 @@ body {
 
 	top: 0;
 	bottom: 0;
-	width: 640px;
-	left: calc( (100% - 640px) / 2 );
+	width: calc(640px + 300px + 5px);
+
 
 	overflow: hidden;
 }
 
 #container {
 	position: absolute;
-
+	left: calc( (100% - 945px) / 2 ); /*640 + 300 + 5*/
 	top: 0;
 	bottom: 0;
 	width: 100%;
 }
 
-
+#vocab{
+	position: relative;
+	float: right;
+	width: 300px;
+	padding-left: 5px;
+}
 /**************************************
 * #info-container styling (the top panel with album cover, track info) */
 
@@ -91,10 +96,10 @@ body {
 
 	width: calc(100% - 240px);
 	height: 100%;
-/*
+
 	font-family: 'Codystar', serif;
 	font-size: 2em;
-	text-transform: uppercase;*/
+	text-transform: uppercase;
 }
 
 #track-data-container > div {
@@ -102,12 +107,12 @@ body {
 
 	width: calc(640px - 240px);
 	height: 25%;
-	/*
+
 	line-height: 2em;
 
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis;*/
+	text-overflow: ellipsis;
 }
 #vocab {top: 2em;}
 #track-artist { top: 2em; }

@@ -1,6 +1,6 @@
 .word-set{
   outline: solid;
-  width:400px;
+  width:300px;
   padding: 4px;
 }
 
@@ -8,10 +8,10 @@
   background: aliceblue;
 }
 span.to-lang {
-  width: 200px;
+  width: 150px;
 }
 span.from-lang {
-  width: 200px;
+  width: 150px;
   float: left;
 }
 

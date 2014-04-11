@@ -6,13 +6,14 @@ var lyrics;
 var language;
 var lyricsArray;
 
-function getLyrics(artist, song, lyricsElement){
-  var key = music_match_key;
-  var url;
-  var ENAPIKey = '0TPFPI9TGBX5CJU49';
+function getLyrics(artist, song, lyricsSelector){
+  if(true){ //run for real
+    var key = music_match_key;
+    var url;
+    var ENAPIKey = '0TPFPI9TGBX5CJU49';
 
-  url = "https://developer.echonest.com/api/v4/song/search?api_key="+ENAPIKey+"&bucket=id:musixmatch-WW&limit=true&bucket=tracks&format=jsonp&artist="+artist+"&title="+song;
-  $.ajax({
+    url = "https://developer.echonest.com/api/v4/song/search?api_key="+ENAPIKey+"&bucket=id:musixmatch-WW&limit=true&bucket=tracks&format=jsonp&artist="+artist+"&title="+song;
+    $.ajax({
       url: url,
       jsonp: "callback",
       dataType: "jsonp",
@@ -21,20 +22,36 @@ function getLyrics(artist, song, lyricsElement){
         songId = data.response.songs[0].foreign_ids[0].foreign_id.split(':')[2];
         url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=" + songId + "&format=jsonp&apikey=" + key;
         $.ajax({
-            url: url,
-            jsonp: "callback",
-            dataType: "jsonp",
+          url: url,
+          jsonp: "callback",
+          dataType: "jsonp",
 
-            // work with the response
-            success: function( response ) {
-              lyrics = response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
-              language = response.message.body.lyrics.lyrics_language;
-              lyricsElement.innerHTML = lyrics;
-              //lyricsArray = lyricsToArray(lyrics);
-            }
+          // work with the response
+          success: function( response ) {
+            lyrics = response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
+            language = response.message.body.lyrics.lyrics_language;
+
+            lyricsArray = lyricsToArray(lyrics);
+            display(lyricsArray,lyricsSelector);
+
+          }
         });
       }
-  });
+    });
+  }else{
+    letra = ['hola', 'niña'];
+    display(letra,lyricsSelector);
+  }
+}
+
+function display(lyricsArray, lyricsSelector){
+    d3.select(lyricsSelector).selectAll('div').data(lyricsArray).enter().append('div')
+    .attr('id', function(d) { return d; })
+    .attr('class', 'word-set')
+    .html(function(w){translate(w); return "<span class='from-lang'>" + w + "</span><span class='holder'><span class='delim-hider'></span><span class='delim'>,</span></span><span class='to-lang'></span><span class='nix'></span"});
+
+    d3.selectAll('.nix').on('click', function(d, i){this.parentNode.remove()});
+
 }
 
 function onlyUnique(value, index, self) {
@@ -42,7 +59,7 @@ function onlyUnique(value, index, self) {
 }
 
 function lyricsToArray(lyrics){
-  return toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").split(" ").filter( onlyUnique );
+  return lyrics.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").split(" ").filter( onlyUnique );
 }
 
 function translate(word){

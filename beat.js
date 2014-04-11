@@ -191,9 +191,11 @@ function setCurrentTrack(track) {
     document.getElementById('cover').style.backgroundImage = 'url(' + coverURL(track) + ')';
 
     // // (1) Modify the displayed artist and track name
-    // document.getElementById('track-artist').innerHTML = artists(track);
-    // document.getElementById('track-name').innerHTML = track.name;
-    var letra = getLyrics(artists(track), track.name, document.getElementById('vocab'));
+    document.getElementById('track-artist').innerHTML = artists(track);
+    document.getElementById('track-name').innerHTML = track.name;
+
+    // (1) Modify the displayed vocab
+    getLyrics(artists(track), track.name, '#vocab');
 
 
     // (1) Fade in all the children of #info-container-- i.e. our track
