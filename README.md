@@ -1,6 +1,6 @@
 # Letra Learner
 
-Plays a song in the spotify player and if the lyrics are availble, translates each word from the initial language (spanish) to english and creates a vocab set based off of the lyrics. I love to listen to music in the language I'm learning and this will make it easier to pick up new vocab words from my favorite songs. The idea was to directly inegrate with [memrise](memrise.com), an awesome flashcard app, but they no longer have API support. Foruntely, they do have a bulk course creater so you can copy and paste the vocab set & create your deck all in one go.
+Plays a song in the spotify player and if the lyrics are availble, translates each word from the initial language (spanish) to english and creates a vocab set based off of the lyrics. I love to listen to music in the language I'm learning and this will make it easier to pick up new vocab words from my favorite songs. The idea was to directly inegrate with [memrise](http://memrise.com), an awesome flashcard app, but they no longer have API support. Foruntely, they do have a bulk course creater so you can copy and paste the vocab set & create your deck all in one go.
 
 ![A screenshot from the app](README_media/letra.png)
 
