@@ -1,0 +1,29 @@
+<html>
+<!-- Testing out the musicxmatch API-->
+<body>
+  <script src="jquery.js"></script>
+  <script src="key.js"></script>
+  <script type="text/javascript">
+    var key = music_match_key;
+    var url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=15953433&format=jsonp&apikey=" + key;
+    var l;
+    var x = $.ajax({
+        url: url,
+
+        jsonp: "callback",
+
+        dataType: "jsonp",
+
+        // work with the response
+        success: function( response ) {
+            l = response;
+            response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
+            response.message.body.lyrics.lyrics_language;
+        }
+    });
+  </script>
+
+
+
+</body>
+</html>

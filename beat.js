@@ -14,7 +14,7 @@ var currentTrack = null;
 var tracks = [];
 
 // (1) We're going to construct our search using Spotify's API, in our case
-var search = 'Spanish';
+var search = 'la oreja de van gogh';
 var maxTracks = 2;
 
 
