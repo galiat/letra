@@ -17,7 +17,7 @@ body {
 	width: calc(640px + 300px + 5px);
 
 
-	overflow: hidden;
+
 }
 
 #container {
@@ -28,11 +28,20 @@ body {
 	width: 100%;
 }
 
-#vocab{
+#vocab-instructions{
 	position: relative;
 	float: right;
-	width: 300px;
-	padding-left: 5px;
+	width: 250px;
+	margin: 5px;
+}
+
+#vocab{
+  padding-top: 1em;
+}
+
+#instructions{
+	padding: 4px;
+	outline: solid grey;
 }
 /**************************************
 * #info-container styling (the top panel with album cover, track info) */

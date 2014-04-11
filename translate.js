@@ -7,7 +7,7 @@ var language;
 var lyricsArray;
 
 function getLyrics(artist, song, lyricsSelector){
-  if(true){ //run for real
+  if(true){ //true makes API an api call to get the lyrics. False skips that.
     var key = music_match_key;
     var url;
     var ENAPIKey = '0TPFPI9TGBX5CJU49';
@@ -19,23 +19,25 @@ function getLyrics(artist, song, lyricsSelector){
       dataType: "jsonp",
       // work with the response
       success: function( data ) {
-        songId = data.response.songs[0].foreign_ids[0].foreign_id.split(':')[2];
-        url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=" + songId + "&format=jsonp&apikey=" + key;
-        $.ajax({
-          url: url,
-          jsonp: "callback",
-          dataType: "jsonp",
+        if (data.response.songs[0]){ //Some songs echo easy just doesn't know about :(
+          songId = data.response.songs[0].foreign_ids[0].foreign_id.split(':')[2];
+          url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=" + songId + "&format=jsonp&apikey=" + key;
+          $.ajax({
+            url: url,
+            jsonp: "callback",
+            dataType: "jsonp",
 
-          // work with the response
-          success: function( response ) {
-            lyrics = response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
-            language = response.message.body.lyrics.lyrics_language;
+            // work with the response
+            success: function( response ) {
+              lyrics = response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
+              language = response.message.body.lyrics.lyrics_language;
 
-            lyricsArray = lyricsToArray(lyrics);
-            display(lyricsArray,lyricsSelector);
+              lyricsArray = lyricsToArray(lyrics);
+              display(lyricsArray,lyricsSelector);
 
-          }
-        });
+            }
+          });
+        }
       }
     });
   }else{
@@ -59,7 +61,7 @@ function onlyUnique(value, index, self) {
 }
 
 function lyricsToArray(lyrics){
-  return lyrics.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").split(" ").filter( onlyUnique );
+  return lyrics.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ").replace(/(\r\n|\n|\r)/gm," ").split(" ").filter( onlyUnique );
 }
 
 function translate(word){
