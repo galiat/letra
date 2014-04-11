@@ -3,6 +3,10 @@
   width:400px;
   padding: 4px;
 }
+
+.word-set:hover {
+  background: aliceblue;
+}
 span.to-lang {
   width: 200px;
 }
@@ -11,10 +15,21 @@ span.from-lang {
   float: left;
 }
 
+/* It might be simpler to style the comma the same as the background. This works for now.*/
 span.delim-hider {
   position: absolute;
   outline: solid black;
   background: black;
   height: 1em;
   width: 1px
+}
+
+span.nix{
+  float: right;
+}
+span.nix:hover{
+  font-weight: bold;
+}
+span.nix:after {
+  content: "X";
 }

@@ -39,7 +39,9 @@
       d3.select('#vocab').selectAll('div').data(letra).enter().append('div')
       .attr('id', function(d) { return d; })
       .attr('class', 'word-set')
-      .html(function(w){translate(w); return "<span class='from-lang'>" + w + "</span><span class='holder'><span class='delim-hider'></span><span class='delim'>,</span></span><span class='to-lang'></span>"});
+      .html(function(w){translate(w); return "<span class='from-lang'>" + w + "</span><span class='holder'><span class='delim-hider'></span><span class='delim'>,</span></span><span class='to-lang'></span><span class='nix'></span"});
+
+      d3.selectAll('.nix').on('click', function(d, i){this.parentNode.remove()});
   </script>
 
 
