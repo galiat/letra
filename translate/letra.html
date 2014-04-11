@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+  <script src="letra.js"></script>
+  <script src="jquery.js"></script>
+  <script src="key.js"></script>
+  <script src="../wordcloud/d3.min.js"></script>
+  <div id='vocab'>
+ </div>
+
+  <script>
+      function translate(word){
+        var url = "https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate?Text=%27" + word + "%27&From=%27es%27&To=%27en%27";
+        var creds = "Basic " + btoa(ms_translate_key + ":" + ms_translate_key);
+
+        var settings = {
+          url: url,
+          beforeSend: function (xhr){
+                xhr.setRequestHeader('Authorization', creds);
+            },
+        };
+
+
+
+        var result = $.ajax(settings).done(function(data){
+          var translated = data.getElementsByTagName('content')[0].firstChild.firstChild.innerHTML;
+          $('#' + word + ' .to-lang').html(translated);
+        });
+
+      }
+      var wordset = d3.select('.word-set')[0];
+      //letra = ['hola', 'niña'];
+
+      d3.select('#vocab').selectAll('div').data(letra).enter().append('div')
+      .attr('id', function(d) { return d; })
+      .attr('class', 'word-set')
+      .html(function(w){translate(w); return "<span class='from-lang'>" + w + "</span><span class='delim'>,</span><span class='to-lang'></span>"});
+  </script>
+
+</body>
+<html>

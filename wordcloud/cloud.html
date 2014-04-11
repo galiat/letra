@@ -39,7 +39,7 @@
                 .append("g")
                 // without the transform, words words would get cutoff to the left and top, they would
                 // appear outside of the SVG area
-                //.attr("transform", "translate(110,110)")
+                .attr("transform", "translate(110,110)")
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
@@ -90,7 +90,7 @@
       // console.log(x);
       // console.log(y);
       //texts[i].setAttribute('transform',"translate(" + (x - movex)+ "," + (y - movey) + ")");
-      texts[i].setAttribute('transform',"translate(" + (x-movex)+ "," + (y-movey) + ")");
+      //texts[i].setAttribute('transform',"translate(" + (x-movex)+ "," + (y-movey) + ")");
     }
 
 </script>

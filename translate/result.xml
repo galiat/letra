@@ -1,0 +1,6 @@
+<!--
+curl -u ms_translate_key:ms_translate_key  "https://api.datamarket.azure.com/Bing/MicrosoftTranslator/v1/Translate?Text=%27hi%27&From=%27en%27&To=%27es%27"
+-->
+
+
+<feed xmlns:base="https://api.datamarket.azure.com/Data.ashx/Bing/MicrosoftTranslator/v1/Translate" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom"><title type="text" /><subtitle type="text">Microsoft Translator</subtitle><id>https://api.datamarket.azure.com/Data.ashx/Bing/MicrosoftTranslator/v1/Translate?Text='hi'&amp;From='en'&amp;To='es'</id><rights type="text" /><updated>2014-04-10T21:53:11Z</updated><link rel="self" href="https://api.datamarket.azure.com/Data.ashx/Bing/MicrosoftTranslator/v1/Translate?Text='hi'&amp;From='en'&amp;To='es'" /><entry><id>https://api.datamarket.azure.com/Data.ashx/Bing/MicrosoftTranslator/v1/Translate?Text='hi'&amp;From='en'&amp;To='es'&amp;$skip=0&amp;$top=1</id><title type="text">Translation</title><updated>2014-04-10T21:53:11Z</updated><link rel="self" href="https://api.datamarket.azure.com/Data.ashx/Bing/MicrosoftTranslator/v1/Translate?Text='hi'&amp;From='en'&amp;To='es'&amp;$skip=0&amp;$top=1" /><content type="application/xml"><m:properties><d:Text m:type="Edm.String">Hola</d:Text></m:properties></content></entry></feed>
