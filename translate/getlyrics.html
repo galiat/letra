@@ -4,23 +4,41 @@
   <script src="jquery.js"></script>
   <script src="key.js"></script>
   <script type="text/javascript">
+
     var key = music_match_key;
-    var url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=15953433&format=jsonp&apikey=" + key;
-    var l;
-    var x = $.ajax({
+    var url;
+    var ENAPIKey = '0TPFPI9TGBX5CJU49';
+    var artist = "La Oreja de Van Gogh"
+    var song = "Jueves"
+
+    var songId;
+    var lyrics;
+    var language;
+
+    url = "https://developer.echonest.com/api/v4/song/search?api_key="+ENAPIKey+"&bucket=id:musixmatch-WW&limit=true&bucket=tracks&format=jsonp&artist="+artist+"&title="+song;
+    $.ajax({
         url: url,
-
         jsonp: "callback",
-
         dataType: "jsonp",
-
         // work with the response
-        success: function( response ) {
-            l = response;
-            response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
-            response.message.body.lyrics.lyrics_language;
+        success: function( data ) {
+          songId = data.response.songs[0].foreign_ids[0].foreign_id.split(':')[2];
+          url = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=" + songId + "&format=jsonp&apikey=" + key;
+          $.ajax({
+              url: url,
+              jsonp: "callback",
+              dataType: "jsonp",
+
+              // work with the response
+              success: function( response ) {
+                lyrics = response.message.body.lyrics.lyrics_body.replace('******* This Lyrics is NOT for Commercial use *******', '').replace('...', '');
+                language = response.message.body.lyrics.lyrics_language;
+              }
+          });
         }
     });
+
+
   </script>
 
 
