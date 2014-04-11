@@ -1,0 +1,20 @@
+.word-set{
+  outline: solid;
+  width:400px;
+  padding: 4px;
+}
+span.to-lang {
+  width: 200px;
+}
+span.from-lang {
+  width: 200px;
+  float: left;
+}
+
+span.delim-hider {
+  position: absolute;
+  outline: solid black;
+  background: black;
+  height: 1em;
+  width: 1px
+}

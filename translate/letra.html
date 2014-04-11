@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+  <meta charset="utf-8">
+  <link type="text/css" rel='stylesheet' href="./letra.css">
 </head>
 <body>
   <script src="letra.js"></script>
   <script src="jquery.js"></script>
   <script src="key.js"></script>
   <script src="../wordcloud/d3.min.js"></script>
+
   <div id='vocab'>
  </div>
 
@@ -32,13 +34,15 @@
 
       }
       var wordset = d3.select('.word-set')[0];
-      //letra = ['hola', 'niña'];
+      letra = ['hola', 'niña'];
 
       d3.select('#vocab').selectAll('div').data(letra).enter().append('div')
       .attr('id', function(d) { return d; })
       .attr('class', 'word-set')
-      .html(function(w){translate(w); return "<span class='from-lang'>" + w + "</span><span class='delim'>,</span><span class='to-lang'></span>"});
+      .html(function(w){translate(w); return "<span class='from-lang'>" + w + "</span><span class='holder'><span class='delim-hider'></span><span class='delim'>,</span></span><span class='to-lang'></span>"});
   </script>
+
+
 
 </body>
 <html>
